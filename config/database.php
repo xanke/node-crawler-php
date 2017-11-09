@@ -14,7 +14,7 @@ return [
     // 用户名
     'username'       => 'crawler',
     // 密码
-    'password'       => 'ncnb154',
+    'password'       => 'nxnb154',
     // 端口
     'hostport'       => '3306',
     // 连接dsn
@@ -40,7 +40,7 @@ return [
     // 数据集返回类型 array 数组 collection Collection对象
     'resultset_type' => 'array',
     // 是否自动写入时间戳字段
-    'auto_timestamp' => false,
+    'auto_timestamp' => true,
     // 是否需要进行SQL性能分析
     'sql_explain'    => false,
     // 时间字段是否自动格式化输出

@@ -14,6 +14,8 @@ return [
         'admin/menus'		   =>'admin/menus',
         'admin/structures'	   =>'admin/structures',
         'admin/posts'          =>'admin/posts',
+
+        'admin/tasks'		   =>'admin/tasks',
     ],
 
 	// 【基础】登录

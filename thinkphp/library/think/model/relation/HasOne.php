@@ -18,12 +18,12 @@ use think\Model;
 class HasOne extends OneToOne
 {
     /**
-     * 架构函数
+     * 构造函数
      * @access public
      * @param Model  $parent     上级模型对象
      * @param string $model      模型名
      * @param string $foreignKey 关联外键
-     * @param string $localKey   关联主键
+     * @param string $localKey   当前模型主键
      * @param string $joinType   JOIN类型
      */
     public function __construct(Model $parent, $model, $foreignKey, $localKey, $joinType = 'INNER')
@@ -47,10 +47,35 @@ class HasOne extends OneToOne
         // 执行关联定义方法
         $localKey = $this->localKey;
         if ($closure) {
-            call_user_func_array($closure, [& $this->query]);
+            call_user_func_array($closure, [ & $this->query]);
         }
         // 判断关联类型执行查询
-        return $this->query->where($this->foreignKey, $this->parent->$localKey)->relation($subRelation)->find();
+        $relationModel = $this->query->where($this->foreignKey, $this->parent->$localKey)->relation($subRelation)->find();
+
+        if ($relationModel) {
+            $relationModel->setParent(clone $this->parent);
+        }
+
+        return $relationModel;
+    }
+
+    /**
+     * 根据关联条件查询当前模型
+     * @access public
+     * @return Query
+     */
+    public function has()
+    {
+        $table      = $this->query->getTable();
+        $model      = basename(str_replace('\\', '/', get_class($this->parent)));
+        $relation   = basename(str_replace('\\', '/', $this->model));
+        $localKey   = $this->localKey;
+        $foreignKey = $this->foreignKey;
+        return $this->parent->db()
+            ->alias($model)
+            ->whereExists(function ($query) use ($table, $model, $relation, $localKey, $foreignKey) {
+                $query->table([$table => $relation])->field($relation . '.' . $foreignKey)->whereExp($model . '.' . $localKey, '=' . $relation . '.' . $foreignKey);
+            });
     }
 
     /**
@@ -116,13 +141,16 @@ class HasOne extends OneToOne
                     $relationModel = null;
                 } else {
                     $relationModel = $data[$result->$localKey];
+                    $relationModel->setParent(clone $result);
+                    $relationModel->isUpdate(true);
                 }
-                if ($relationModel && !empty($this->bindAttr)) {
+                if (!empty($this->bindAttr)) {
                     // 绑定关联属性
                     $this->bindAttr($relationModel, $result, $this->bindAttr);
+                } else {
+                    // 设置关联属性
+                    $result->setRelation($attr, $relationModel);
                 }
-                // 设置关联属性
-                $result->setAttr($attr, $relationModel);
             }
         }
     }
@@ -147,13 +175,15 @@ class HasOne extends OneToOne
             $relationModel = null;
         } else {
             $relationModel = $data[$result->$localKey];
+            $relationModel->setParent(clone $result);
+            $relationModel->isUpdate(true);
         }
-
-        if ($relationModel && !empty($this->bindAttr)) {
+        if (!empty($this->bindAttr)) {
             // 绑定关联属性
             $this->bindAttr($relationModel, $result, $this->bindAttr);
+        } else {
+            $result->setRelation(Loader::parseName($relation), $relationModel);
         }
-        $result->setAttr(Loader::parseName($relation), $relationModel);
     }
 
 }

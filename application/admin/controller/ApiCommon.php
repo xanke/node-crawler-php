@@ -26,10 +26,16 @@ class ApiCommon extends Common
         $cache = cache('Auth_'.$authKey);
         
         // 校验sessionid和authKey
-        if (empty($sessionId)||empty($authKey)||empty($cache)) {
+        // if (empty($sessionId)||empty($authKey)||empty($cache)) {
+        //     header('Content-Type:application/json; charset=utf-8');
+        //     exit(json_encode(['code'=>101, 'error'=>'登录已失效']));
+        // }
+
+        if (empty($authKey)) {
             header('Content-Type:application/json; charset=utf-8');
             exit(json_encode(['code'=>101, 'error'=>'登录已失效']));
         }
+
 
         // 检查账号有效性
         $userInfo = $cache['userInfo'];
