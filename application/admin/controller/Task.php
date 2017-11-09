@@ -7,7 +7,7 @@
 
 namespace app\admin\controller;
 
-class Tasks extends ApiCommon
+class Task extends ApiCommon
 {
     
     public function index()

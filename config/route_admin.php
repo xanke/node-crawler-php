@@ -15,7 +15,8 @@ return [
         'admin/structures'	   =>'admin/structures',
         'admin/posts'          =>'admin/posts',
 
-        'admin/tasks'		   =>'admin/tasks',
+        'task'		       =>'admin/task',
+        'task/model'	   =>'admin/taskmodel',
     ],
 
 	// 【基础】登录
