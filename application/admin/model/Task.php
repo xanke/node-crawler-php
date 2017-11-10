@@ -40,12 +40,9 @@ class Task extends Common
 		$data['websiteList'] = [];
 
 		if ($data['website_num'] > 0) {
-
-			$websiteList = model('task_website') -> where(['tid' => $id]) -> join('website', 'website.id=task_website.wid', 'LEFT') -> select();
-
+			$websiteList = model('task_website') ->alias('task_website') -> join('website', 'website.id = task_website.wid') -> where(['task_website.tid' => $id]) -> select();
 			$data['websiteList'] = $websiteList;
 		}
-
 
 		if (!$data) {
 			$this->error = '暂无此数据';
