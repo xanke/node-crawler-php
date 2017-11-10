@@ -17,6 +17,8 @@ return [
 
         'task'		       =>'admin/task',
         'task/model'	   =>'admin/taskmodel',
+        'task/website'	   =>'admin/taskWebsite',
+        'website'		   =>'admin/website',
     ],
 
 	// 【基础】登录

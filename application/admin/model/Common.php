@@ -47,7 +47,8 @@ class Common extends Model
 		}
 		try {
 			$this->data($param)->allowField(true)->save();
-			return true;
+			// return true;
+			return $this -> id;
 		} catch(\Exception $e) {
 			$this->error = '添加失败';
 			return false;
