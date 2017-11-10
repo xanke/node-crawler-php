@@ -7,12 +7,12 @@
 
 namespace app\admin\controller;
 
-class Website extends ApiCommon
+class WebsiteModel extends ApiCommon
 {
     
     public function index()
     {   
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
         $data = $websiteModel->getDataList();
         return resultArray(['data' => $data]);
@@ -20,7 +20,7 @@ class Website extends ApiCommon
 
     public function read()
     {   
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
         $data = $websiteModel->getDataById($param['id']);
         if (!$data) {
@@ -31,7 +31,7 @@ class Website extends ApiCommon
 
     public function save()
     {
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
 
 
@@ -45,7 +45,7 @@ class Website extends ApiCommon
 
     public function update($id)
     {
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
 
         $data = $websiteModel->updateDataById($param, $param['id']);
@@ -57,7 +57,7 @@ class Website extends ApiCommon
 
     public function delete()
     {
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
         $data = $websiteModel->delDataById($param['id'], true);       
         if (!$data) {
@@ -68,7 +68,7 @@ class Website extends ApiCommon
 
     public function deletes()
     {
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
         $data = $websiteModel->delDatas($param['ids'], true);  
         if (!$data) {
@@ -79,7 +79,7 @@ class Website extends ApiCommon
 
     public function enables()
     {
-        $websiteModel = model('Website');
+        $websiteModel = model('WebsiteModel');
         $param = $this->param;
         $data = $websiteModel->enableDatas($param['ids'], $param['status'], true);  
         if (!$data) {

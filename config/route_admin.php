@@ -18,6 +18,8 @@ return [
         'task'		       =>'admin/task',
         'task/model'	   =>'admin/taskmodel',
         'task/website'	   =>'admin/taskWebsite',
+
+        'website/model'	   =>'admin/websiteModel',
         'website'		   =>'admin/website',
     ],
 
