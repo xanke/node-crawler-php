@@ -18,9 +18,10 @@ return [
         'task'		       =>'admin/task',
         'task/model'	   =>'admin/taskmodel',
         'task/website'	   =>'admin/taskWebsite',
+        'task/rule'	       =>'admin/taskRule',
 
         'website/model'	   =>'admin/websiteModel',
-        'website'		   =>'admin/website',
+        'website/rule'	   =>'admin/websiteRule',
     ],
 
 	// 【基础】登录
