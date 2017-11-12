@@ -8,9 +8,9 @@ use think\Validate;
 class WebsiteRule extends Validate{
 
 	protected $rule = array(
-		'url'   => 'require'
+		// 'url'   => 'require'
 	);
 	protected $message = array(
-		'url.require'    => 'Url必须填写'
+		// 'url.require'    => 'Url必须填写'
 	);
 }
