@@ -46,9 +46,11 @@ class Website extends ApiCommon
 
         if ($param['tid']) {
             $tid = $param['tid'];
+
+            $data = $taskWebsiteModel->addTask($tid, $wid);
         }
 
-        $data = $taskWebsiteModel->addTask($tid, $wid);
+        
 
         return resultArray(['data' => '添加成功']);
     }

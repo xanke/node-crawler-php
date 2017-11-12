@@ -37,11 +37,11 @@ class Task extends Common
 	{
 		$data = $this->get($id);
 
-		$data['websiteList'] = [];
+		$data['website_list'] = [];
 
 		if ($data['website_num'] > 0) {
 			$websiteList = model('task_website') ->alias('task_website') -> join('website', 'website.id = task_website.wid') -> where(['task_website.tid' => $id]) -> select();
-			$data['websiteList'] = $websiteList;
+			$data['website_list'] = $websiteList;
 		}
 
 		if (!$data) {
