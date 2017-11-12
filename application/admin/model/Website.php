@@ -39,7 +39,7 @@ class Website extends Common
 
 		// $data['runle_list'] = [];
 
-		$data['rule_list'] = model('website') ->alias('website') -> join('website_rule', 'website.id = website_rule.wid')  -> select();
+		$data['rule_list'] = model('website') ->alias('website') -> join('website_rule', 'website.id = website_rule.wid') -> where(['website_rule.wid' => $id])  -> select();
 		
 		
 
