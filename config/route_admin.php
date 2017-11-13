@@ -20,6 +20,10 @@ return [
         'task/website'	   =>'admin/taskWebsite',
         'task/rule'	       =>'admin/taskRule',
 
+        'scan/data'	       =>'admin/scanData',
+
+
+        'website'	   =>'admin/website',
         'website/model'	   =>'admin/websiteModel',
         'website/rule'	   =>'admin/websiteRule',
     ],

@@ -5,7 +5,7 @@ use think\Validate;
 /**
 * 设置模型
 */
-class WebsiteRule extends Validate{
+class ScanData extends Validate{
 
 	protected $rule = array(
 		// 'url'   => 'require'
