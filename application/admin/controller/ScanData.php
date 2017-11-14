@@ -14,7 +14,21 @@ class ScanData extends ApiCommon
     {   
         $scanDataModel = model('ScanData');
         $param = $this->param;
-        $data = $scanDataModel->getDataList();
+
+        $where = [];
+        if (!empty($param['wid'])) {
+            $where['wid'] = $param['wid'];
+        }
+
+        if (!empty($param['oid'])) {
+            $where['oid'] = $param['oid'];
+        }
+
+
+        $page     = !empty($param['page']) ? $param['page']: '';
+        $limit    = !empty($param['limit']) ? $param['limit']: '';
+
+        $data = $scanDataModel->getDataList($where, $page, $limit);
         return resultArray(['data' => $data]);
     }
 
