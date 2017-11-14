@@ -22,6 +22,8 @@ return [
 
         'scan/data'	       =>'admin/scanData',
 
+        'scan/sync'	       =>'admin/scanSync',
+
 
         'website'	   =>'admin/website',
         'website/model'	   =>'admin/websiteModel',
@@ -68,6 +70,10 @@ return [
 	'admin/posts/deletes' => ['admin/posts/deletes', ['method' => 'POST']],
 	// 【部门】批量启用/禁用
 	'admin/posts/enables' => ['admin/posts/enables', ['method' => 'POST']],
+
+
+	'scan/data/count' => ['admin/scanData/count', ['method' => 'POST']],
+
 	
 	// MISS路由
 	// '__miss__'  => 'admin/base/miss',

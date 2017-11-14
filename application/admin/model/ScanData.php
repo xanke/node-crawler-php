@@ -32,4 +32,18 @@ class ScanData extends Common
 		
 		return $data;
 	}
+
+	public function countById($id) {
+
+		$count = model('ScanData') -> where(['wid' => $id]) -> count();
+		$sync = model('ScanData') -> where(['wid' => $id, 'sync' => 1]) -> count();
+
+		$data = [
+			'scan_num' => $count,
+			'sync_num'  => $sync,
+		];
+		return $data;
+	}
+
+
 }

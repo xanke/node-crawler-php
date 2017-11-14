@@ -26,7 +26,7 @@ class Website extends ApiCommon
         } 
         return resultArray(['data' => $data]);
     }
-
+ 
     public function save()
     {
         $websiteModel = model('Website');

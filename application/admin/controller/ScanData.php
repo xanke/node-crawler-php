@@ -33,13 +33,10 @@ class ScanData extends ApiCommon
     {
         $scanDataModel = model('ScanData');
 
-
         $param = $this->param;
-
         $data = $param['data'];
 
         $where = [];
-
         $qData = [];
 
         foreach ($data as $key => $value) {
@@ -52,19 +49,23 @@ class ScanData extends ApiCommon
 
         $sql = $scanDataModel -> where($where) -> select();
 
+        //去除重复
         foreach ($sql as $key => $value) {
             unset($qData[$value['url']]);
         }
 
-
-
-
- 
+        //插入所有数据 
         $sql = $scanDataModel -> insertAll( $qData );
 
         if (!$sql) {
             return resultArray(['error' => '未增加']);
         }
+
+        $wid = $param['wid'];
+
+        $websiteModel = model('Website');
+        $data = $websiteModel -> updateDataById(['run_time' => time()], $wid);
+
  
         $res = [
             'arr' => $qData,
@@ -72,9 +73,28 @@ class ScanData extends ApiCommon
             'msg' => '添加成功'
         ];
 
-
-
         return resultArray(['data' => $res]);
+    }
+
+    //采集统计操作
+    public function count($id) 
+    {
+        $param = $this->param;
+        $scanDataModel = model('ScanData');
+        $data = $scanDataModel -> countById($param['id']);
+
+
+        $websiteModel = model('Website');
+        $wData = $websiteModel -> updateDataById($data, $param['id']);
+
+        if (!$wData) {
+            return resultArray(['error' => $websiteModel->getError()]);
+        }
+
+        if (!$data) {
+            return resultArray(['error' => $scanDataModel->getError()]);
+        }
+        return resultArray(['data' => $data]);
     }
 
     public function update($id)
