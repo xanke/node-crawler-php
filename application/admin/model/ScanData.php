@@ -16,19 +16,17 @@ class ScanData extends Common
      * 我们约定每个模块的数据表都加上相同的前缀，比如微信模块用weixin作为数据表前缀
      */
 	protected $name = 'ScanData';
-
 	/**
 	 * [getDataList 获取列表]
 	 * @linchuangbin
 	 * @DateTime  2017-02-10T21:07:18+0800
 	 * @return    [array]                         
 	 */
-	public function getDataList()
+	public function getDataList($where, $page = 0, $limit = 30)
 	{
 		// $cat = new \com\Category('ScanData', array('id', 'title'));
 		// $data = $cat->getList('', 0, 'id');
-
-		$data = model('ScanData') -> select();
+		$data = model('ScanData') -> where($where) -> page($page, $limit) -> select();
 		
 		return $data;
 	}
