@@ -46,7 +46,6 @@ class ScanData extends ApiCommon
 
         $where = implode('" or url="', $where);
         $where = 'url="' . $where . '"';
-
         $sql = $scanDataModel -> where($where) -> select();
 
         //去除重复
@@ -57,9 +56,10 @@ class ScanData extends ApiCommon
         //插入所有数据 
         $sql = $scanDataModel -> insertAll( $qData );
 
-        if (!$sql) {
-            return resultArray(['error' => '未增加']);
-        }
+        // if (!$sql) {
+        //     return resultArray(['data' => $res]);
+        //     // return resultArray(['error' => '未增加']);
+        // }
 
         $wid = $param['wid'];
 
