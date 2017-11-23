@@ -24,8 +24,10 @@ return [
 
         'scan/sync'	       =>'admin/scanSync',
 
+        'admin/scan/server'	    =>'admin/scanServer',
 
-        'website'	   =>'admin/website',
+
+        'website'	       =>'admin/website',
         'website/model'	   =>'admin/websiteModel',
         'website/rule'	   =>'admin/websiteRule',
     ],
